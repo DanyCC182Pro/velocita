@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELOCITÀ | Reserva tu Ferrari</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --rojo-ferrari: #ff2800;
+            --negro: #121212;
+            --gris-oscuro: #222;
+            --gris-claro: #444;
+            --blanco: #f5f5f5;
+            --amarillo: #ffdb00;
+            --neon-rosa: #ff00ff;
+            --neon-azul: #00ffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--negro);
+            color: var(--blanco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .contenedor {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* HEADER Y TÍTULO */
+        .titulo {
+            background-color: var(--negro);
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid var(--rojo-ferrari);
+            overflow: hidden;
+        }
+        
+        .titulo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--rojo-ferrari), transparent);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--blanco);
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+        
+        .logo span {
+            color: var(--rojo-ferrari);
+            text-shadow: 2px 2px 0px rgba(255, 40, 0, 0.3);
+        }
+        
+        .slogan {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            font-weight: 300;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* MENÚ LATERAL Y NAVEGACIÓN */
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .menu {
+            width: 280px;
+            background-color: var(--gris-oscuro);
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(255, 40, 0, 0.3);
+        }
+        
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 40, 0, 0.1) 0%, transparent 100%);
+            z-index: 0;
+        }
+        
+        .menu-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .menu-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0;
+            text-transform: uppercase;
+            color: var(--rojo-ferrari);
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-item {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--blanco);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-link:hover {
+            border-left: 4px solid var(--rojo-ferrari);
+            background-color: rgba(255, 40, 0, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .nav-link.active {
+            border-left: 4px solid var(--rojo-ferrari);
+            background-color: rgba(255, 40, 0, 0.15);
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            color: var(--rojo-ferrari);
+        }
+        
+        /* Estilos para el menú desplegable */
+        .dropdown-menu {
+            background-color: var(--gris-oscuro);
+            border: 1px solid rgba(255, 40, 0, 0.3);
+            border-radius: 0;
+            padding: 0;
+            margin-top: 0;
+            min-width: 100%;
+        }
+        
+        .dropdown-item {
+            color: var(--blanco);
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: rgba(255, 40, 0, 0.1);
+            color: var(--blanco);
+            border-left: 4px solid var(--rojo-ferrari);
+        }
+        
+        .dropdown-toggle::after {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* CONTENIDO PRINCIPAL */
+        .contenido {
+            flex: 1;
+            background-color: var(--gris-oscuro);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contenido::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 40, 0, 0.1), transparent 70%);
+            z-index: 0;
+        }
+        
+        .contenido-principal {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--blanco);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--rojo-ferrari);
+        }
+        
+        /* ESTILOS PARA LA PÁGINA DE CONTACTO */
+        .contacto-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .contacto-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contacto-form {
+            flex: 2;
+            min-width: 350px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2.5rem;
+            border-left: 4px solid var(--rojo-ferrari);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .contacto-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 40, 0, 0.05) 0%, transparent 100%);
+            z-index: 0;
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--blanco);
+            position: relative;
+        }
+        
+        .form-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #aaa;
+            position: relative;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--blanco);
+        }
+        
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--blanco);
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--rojo-ferrari);
+            box-shadow: 0 0 10px rgba(255, 40, 0, 0.3);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff2800' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+        
+        .submit-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--rojo-ferrari);
+            color: var(--blanco);
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+            z-index: 0;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 40, 0, 0.3);
+        }
+        
+        /* Información de contacto */
+        .contact-info-block {
+            margin-bottom: 2.5rem;
+        }
+        
+        .contact-info-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--rojo-ferrari);
+            letter-spacing: 1px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: var(--rojo-ferrari);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-text {
+            font-size: 1.1rem;
+            color: var(--blanco);
+        }
+        
+        /* Horarios de atención */
+        .hours-block {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .day {
+            font-weight: 600;
+        }
+        
+        .time {
+            color: #aaa;
+        }
+        
+        /* Mapa */
+        .map-container {
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 40, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 250px;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-placeholder {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #222, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .map-icon {
+            font-size: 3rem;
+            color: var(--rojo-ferrari);
+            margin-bottom: 1rem;
+        }
+        
+        .map-text {
+            font-size: 1rem;
+            color: #aaa;
+            text-align: center;
+        }
+        
+        /* Efectos hover para los elementos de contacto */
+        .contact-detail:hover .contact-icon {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--rojo-ferrari);
+        }
+        
+        .contact-detail:hover .contact-text {
+            color: var(--rojo-ferrari);
+        }
+        
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-effect {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Efecto de brillo para inputs focus */
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--rojo-ferrari);
+            transition: width 0.3s ease;
+            z-index: 1;
+        }
+        
+        .form-group:focus-within::after {
+            width: 100%;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .layout-container {
+                flex-direction: column;
+            }
+            
+            .menu {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 40, 0, 0.3);
+            }
+            
+            .nav-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                margin: 0.5rem;
+            }
+            
+            .nav-link {
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+            
+            .nav-link:hover, .nav-link.active {
+                border-left: none;
+                border-bottom: 4px solid var(--rojo-ferrari);
+            }
+            
+            .contacto-container {
+                flex-direction: column;
+            }
+            
+            .dropdown-menu {
+                position: static !important;
+                width: 100%;
+                transform: none !important;
+                margin-top: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contenido {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contacto-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="titulo">
+            <h1 class="logo">VELOCI<span>TÀ</span></h1>
+            <p class="slogan">EXPERIMENTA EL LUJO EN MOVIMIENTO</p>
+        </div>
+        
+        <div class="layout-container">
+            <div class="menu">
+                <div class="menu-header">
+                    <h2 class="menu-title neon-accent">NAVEGA</h2>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="autos.html" class="nav-link">
+                            <i class="fas fa-car"></i> Nuestros Ferraris
+                        </a>
+                    </li>
+                    <!-- Menú desplegable de servicios añadido -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="serviciosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-tools"></i> Servicios
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="serviciosDropdown">
+                            <li><a class="dropdown-item" href="mantenimiento.html">
+                                <i class="fas fa-cogs"></i> Mantenimiento
+                            </a></li>
+                            <li><a class="dropdown-item" href="montallantas.html">
+                                <i class="fas fa-tire"></i> Montallantas
+                            </a></li>
+                            <li><a class="dropdown-item" href="alineacion.html">
+                                <i class="fas fa-balance-scale"></i> Alineación
+                            </a></li>
+                            <li><a class="dropdown-item" href="balanceo.html">
+                                <i class="fas fa-sync"></i> Balanceo
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contacto.html" class="nav-link active">
+                            <i class="fas fa-envelope"></i> Reserva Ahora
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contenido">
+                <div class="contenido-principal">
+                    <h2 class="section-title glitch-effect">RESERVA TU EXPERIENCIA FERRARI</h2>
+                    
+                    <div class="contacto-container">
+                        <div class="contacto-info">
+                            <div class="contact-info-block">
+                                <h3 class="contact-info-title">CONTÁCTANOS</h3>
+                                
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        Av. Circunvalar #128-30<br>
+                                        Bogotá, Colombia
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        +57 (601) 742-8000
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        reservas@velocita.co
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-detail">
+                                    <div class="contact-icon">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div class="contact-text">
+                                        +57 310 258 9632
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-block">
+                                <h3 class="contact-info-title">HORARIOS DE ATENCIÓN</h3>
+                                
+                                <div class="hours-block">
+                                    <span class="day">Lunes - Viernes</span>
+                                    <span class="time">9:00 - 19:00</span>
+                                </div>
+                                
+                                <div class="hours-block">
+                                    <span class="day">Sábados</span>
+                                    <span class="time">10:00 - 17:00</span>
+                                </div>
+                                
+                                <div class="hours-block">
+                                    <span class="day">Domingos</span>
+                                    <span class="time">11:00 - 15:00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="map-container">
+                                <div class="map-placeholder">
+                                    <div class="map-icon">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </div>
+                                    <div class="map-text">
+                                        Visítanos en nuestra exclusiva sala de exhibición
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contacto-form" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                            <h3 class="form-title">SOLICITA TU RESERVA</h3>
+                            <p class="form-subtitle">Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas</p>
+                            
+                            <form id="reserva-form">
+                                <div class="form-group">
+                                    <label for="nombre" class="form-label">Nombre Completo</label>
+                                    <input type="text" id="nombre" class="form-input" placeholder="Tu nombre completo" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" id="email" class="form-input" placeholder="tu@email.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" id="telefono" class="form-input" placeholder="Tu número de contacto" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modelo" class="form-label">Modelo de Interés</label>
+                                    <select id="modelo" class="form-select" required>
+                                        <option value="" disabled selected>Selecciona un modelo</option>
+                                        <option value="Ferrari Roma">Ferrari Roma</option>
+                                        <option value="Ferrari F8 Tributo">Ferrari F8 Tributo</option>
+                                        <option value="Ferrari 812 Superfast">Ferrari 812 Superfast</option>
+                                        <option value="Ferrari SF90 Stradale">Ferrari SF90 Stradale</option>
+                                        <option value="Ferrari Portofino">Ferrari Portofino</option>
+                                        <option value="otro">Otro modelo</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="fecha" class="form-label">Fecha Deseada</label>
+                                    <input type="date" id="fecha" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="dias" class="form-label">Días de Renta</label>
+                                    <select id="dias" class="form-select" required>
+                                        <option value="" disabled selected>Selecciona la duración</option>
+                                        <option value="1">1 día (24 horas)</option>
+                                        <option value="2">2 días</option>
+                                        <option value="3">3 días</option>
+                                        <option value="fin_semana">Fin de semana</option>
+                                        <option value="semana">Semana completa</option>
+                                        <option value="personalizado">Personalizado</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="mensaje" class="form-label">Mensaje Adicional</label>
+                                    <textarea id="mensaje" class="form-textarea" placeholder="Cuéntanos más detalles sobre tu reserva o si tienes alguna consulta especial"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="submit-btn pulse-effect">
+                                    ENVIAR SOLICITUD <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle (includes Popper) - Añadido -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Efecto de enfoque para los inputs
+        const inputs = document.querySelectorAll('.form-input, .form-textarea, .form-select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('active');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('active');
+            });
+        });
+        
+        // Formulario de reserva
+        const reservaForm = document.getElementById('reserva-form');
+        
+        if (reservaForm) {
+            reservaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Aquí iría el código para procesar el formulario
+                alert('¡Gracias por tu solicitud! Nos pondremos en contacto contigo a la brevedad.');
+                reservaForm.reset();
+            });
+        }
+    </script>
+
+    <script src="assets/js/music-player.js"></script>
+</body>
+</html>

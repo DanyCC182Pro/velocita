@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELOCITÀ | Servicio de Montallantas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --rojo-ferrari: #ff2800;
+            --negro: #121212;
+            --gris-oscuro: #222;
+            --gris-claro: #444;
+            --blanco: #f5f5f5;
+            --amarillo: #ffdb00;
+            --neon-rosa: #ff00ff;
+            --neon-azul: #00ffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--negro);
+            color: var(--blanco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .contenedor {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* HEADER Y TÍTULO */
+        .titulo {
+            background-color: var(--negro);
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid var(--rojo-ferrari);
+            overflow: hidden;
+        }
+        
+        .titulo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--rojo-ferrari), transparent);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--blanco);
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+        
+        .logo span {
+            color: var(--rojo-ferrari);
+            text-shadow: 2px 2px 0px rgba(255, 40, 0, 0.3);
+        }
+        
+        .slogan {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            font-weight: 300;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* MENÚ LATERAL Y NAVEGACIÓN */
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .menu {
+            width: 280px;
+            background-color: var(--gris-oscuro);
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(255, 40, 0, 0.3);
+        }
+        
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 40, 0, 0.1) 0%, transparent 100%);
+            z-index: 0;
+        }
+        
+        .menu-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .menu-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0;
+            text-transform: uppercase;
+            color: var(--rojo-ferrari);
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-item {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--blanco);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-link:hover {
+            border-left: 4px solid var(--rojo-ferrari);
+            background-color: rgba(255, 40, 0, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .nav-link.active {
+            border-left: 4px solid var(--rojo-ferrari);
+            background-color: rgba(255, 40, 0, 0.15);
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            color: var(--rojo-ferrari);
+        }
+        
+        /* Estilos para el menú desplegable */
+        .dropdown-menu {
+            background-color: var(--gris-oscuro);
+            border: 1px solid rgba(255, 40, 0, 0.3);
+            border-radius: 0;
+            padding: 0;
+            margin-top: 0;
+            min-width: 100%;
+        }
+        
+        .dropdown-item {
+            color: var(--blanco);
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: rgba(255, 40, 0, 0.1);
+            color: var(--blanco);
+            border-left: 4px solid var(--rojo-ferrari);
+        }
+        
+        .dropdown-toggle::after {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* CONTENIDO PRINCIPAL */
+        .contenido {
+            flex: 1;
+            background-color: var(--gris-oscuro);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contenido::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 40, 0, 0.1), transparent 70%);
+            z-index: 0;
+        }
+        
+        .contenido-principal {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--blanco);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--rojo-ferrari);
+        }
+        
+        .service-content {
+            margin-bottom: 3rem;
+        }
+        
+        .service-subtitle {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--rojo-ferrari);
+        }
+        
+        .service-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--rojo-ferrari);
+            color: var(--blanco);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid var(--rojo-ferrari);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 40, 0, 0.3);
+        }
+        
+        .service-features {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+            margin-top: 3rem;
+        }
+        
+        .service-feature-box {
+            flex: 1;
+            min-width: 300px;
+            margin: 15px;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--rojo-ferrari);
+            transition: all 0.3s ease;
+        }
+        
+        .service-feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-feature-icon {
+            font-size: 2.5rem;
+            color: var(--rojo-ferrari);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--blanco);
+        }
+        
+        .service-feature-description {
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        /* Estilos para la tabla de precios */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            color: var(--blanco);
+        }
+        
+        .pricing-table th, .pricing-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-table th {
+            background-color: rgba(255, 40, 0, 0.2);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .pricing-table tr:hover {
+            background-color: rgba(255, 40, 0, 0.05);
+        }
+        
+        /* EFECTOS PUNK */
+        .glitch-text {
+            position: relative;
+        }
+        
+        .glitch-effect {
+            position: relative;
+            display: inline-block;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        
+        .neon-accent {
+            text-shadow: 0 0 5px var(--rojo-ferrari), 0 0 10px var(--rojo-ferrari);  
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .layout-container {
+                flex-direction: column;
+            }
+            
+            .menu {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 40, 0, 0.3);
+            }
+            
+            .nav-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                margin: 0.5rem;
+            }
+            
+            .nav-link {
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+            
+            .nav-link:hover, .nav-link.active {
+                border-left: none;
+                border-bottom: 4px solid var(--rojo-ferrari);
+            }
+            
+            .dropdown-menu {
+                position: static !important;
+                width: 100%;
+                transform: none !important;
+                margin-top: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contenido {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .service-features {
+                flex-direction: column;
+            }
+            
+            .service-feature-box {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="titulo">
+            <h1 class="logo">VELOCI<span>TÀ</span></h1>
+            <p class="slogan">PRECISIÓN EN CADA DETALLE</p>
+        </div>
+        
+        <div class="layout-container">
+            <div class="menu">
+                <div class="menu-header">
+                    <h2 class="menu-title neon-accent">NAVEGA</h2>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="autos.html" class="nav-link">
+                            <i class="fas fa-car"></i> Nuestros Ferraris
+                        </a>
+                    </li>
+                    <!-- Menú desplegable de servicios -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="serviciosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-tools"></i> Servicios
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="serviciosDropdown">
+                            <li><a class="dropdown-item" href="mantenimiento.html">
+                                <i class="fas fa-cogs"></i> Mantenimiento
+                            </a></li>
+                            <li><a class="dropdown-item active" href="montallantas.html">
+                                <i class="fas fa-tire"></i> Montallantas
+                            </a></li>
+                            <li><a class="dropdown-item" href="alineacion.html">
+                                <i class="fas fa-balance-scale"></i> Alineación
+                            </a></li>
+                            <li><a class="dropdown-item" href="balanceo.html">
+                                <i class="fas fa-sync"></i> Balanceo
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contacto.html" class="nav-link">
+                            <i class="fas fa-envelope"></i> Reserva Ahora
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contenido">
+                <div class="contenido-principal">
+                    <h2 class="section-title glitch-effect">SERVICIO DE MONTALLANTAS PREMIUM</h2>
+                    
+                    <div class="service-content">
+                        <h3 class="service-subtitle">Neumáticos de Alto Rendimiento con Instalación Especializada</h3>
+                        <p class="service-description">En <strong>VELOCITÀ</strong>, entendemos que los neumáticos son uno de los componentes más críticos en un Ferrari. Nuestro servicio de montallantas de primer nivel está diseñado específicamente para vehículos de alta gama, utilizando equipamiento de última generación y técnicos certificados por Ferrari.</p>
+                        <p class="service-description">Contamos con una selección exclusiva de neumáticos deportivos de las marcas más prestigiosas del mundo, incluyendo Pirelli P Zero, Michelin Pilot Sport y Bridgestone Potenza, perfectos para maximizar el rendimiento de su Ferrari en cualquier condición.</p>
+                        
+                        <a href="contacto.html" class="cta-button">AGENDAR SERVICIO <i class="fas fa-calendar-alt"></i></a>
+                        <a href="#pricing" class="cta-button secondary">VER PRECIOS</a>
+                    </div>
+                    
+                    <div class="service-features">
+                        <div class="service-feature-box">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h3 class="service-feature-title">TÉCNICOS CERTIFICADOS</h3>
+                            <p class="service-feature-description">Nuestros especialistas están entrenados específicamente para trabajar con las ruedas y neumáticos Ferrari, asegurando un servicio impecable.</p>
+                        </div>
+                        
+                        <div class="service-feature-box">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h3 class="service-feature-title">EQUIPO ESPECIALIZADO</h3>
+                            <p class="service-feature-description">Utilizamos exclusivamente herramientas aprobadas por Ferrari para garantizar que no se dañen las costosas llantas de aleación o las válvulas TPMS.</p>
+                        </div>
+                        
+                        <div class="service-feature-box">
+                            <div class="service-feature-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <h3 class="service-feature-title">MÁXIMO RENDIMIENTO</h3>
+                            <p class="service-feature-description">Realizamos una instalación precisa que optimiza la adherencia, estabilidad en curvas y respuesta en frenado para una experiencia de conducción superior.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="pricing" class="mt-5">
+                        <h3 class="service-subtitle">Precios de Nuestro Servicio Premium</h3>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Servicio</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cambio de neumáticos estándar</td>
+                                    <td>Desmontaje, instalación y equilibrado precisos de 4 neumáticos</td>
+                                    <td>€200</td>
+                                </tr>
+                                <tr>
+                                    <td>Cambio de neumáticos deportivos</td>
+                                    <td>Instalación de neumáticos de alto rendimiento con configuración especializada</td>
+                                    <td>€280</td>
+                                </tr>
+                                <tr>
+                                    <td>Programación de sensores TPMS</td>
+                                    <td>Configuración precisa de sensores de presión para monitoreo en tiempo real</td>
+                                    <td>€120</td>
+                                </tr>
+                                <tr>
+                                    <td>Paquete completo de temporada</td>
+                                    <td>Cambio de 4 neumáticos, balanceo, alineación y programación TPMS</td>
+                                    <td>€550</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <p class="service-description">En VELOCITÀ, todos nuestros servicios incluyen diagnóstico gratuito, inspección de componentes de suspensión y chequeo de presión de neumáticos. Contacta con nosotros para programar tu cita o solicitar información adicional sobre nuestros servicios de montallantas premium.</p>
+                        
+                        <a href="contacto.html" class="cta-button mt-4">CONTACTAR AHORA <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/music-player.js"></script>
+</body>
+</html>

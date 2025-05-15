@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELOCITÀ | Nuestros Ferraris</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --rojo-ferrari: #ff2800;
+            --negro: #121212;
+            --gris-oscuro: #222;
+            --gris-claro: #444;
+            --blanco: #f5f5f5;
+            --amarillo: #ffdb00;
+            --neon-rosa: #ff00ff;
+            --neon-azul: #00ffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--negro);
+            color: var(--blanco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .contenedor {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* HEADER Y TÍTULO */
+        .titulo {
+            background-color: var(--negro);
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid var(--rojo-ferrari);
+            overflow: hidden;
+        }
+        
+        .titulo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--rojo-ferrari), transparent);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--blanco);
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+        
+        .logo span {
+            color: var(--rojo-ferrari);
+            text-shadow: 2px 2px 0px rgba(255, 40, 0, 0.3);
+        }
+        
+        .slogan {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            font-weight: 300;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* MENÚ LATERAL Y NAVEGACIÓN */
+        .layout-container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .menu {
+            width: 280px;
+            background-color: var(--gris-oscuro);
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(255, 40, 0, 0.3);
+        }
+        
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 40, 0, 0.1) 0%, transparent 100%);
+            z-index: 0;
+        }
+        
+        .menu-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .menu-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0;
+            text-transform: uppercase;
+            color: var(--rojo-ferrari);
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-item {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--blanco);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-link:hover {
+            border-left: 4px solid var(--rojo-ferrari);
+            background-color: rgba(255, 40, 0, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .nav-link.active {
+            border-left: 4px solid var(--rojo-ferrari);
+            background-color: rgba(255, 40, 0, 0.15);
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            color: var(--rojo-ferrari);
+        }
+        
+        /* Estilos para el menú desplegable */
+        .dropdown-menu {
+            background-color: var(--gris-oscuro);
+            border: 1px solid rgba(255, 40, 0, 0.3);
+            border-radius: 0;
+            padding: 0;
+            margin-top: 0;
+            min-width: 100%;
+        }
+        
+        .dropdown-item {
+            color: var(--blanco);
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: rgba(255, 40, 0, 0.1);
+            color: var(--blanco);
+            border-left: 4px solid var(--rojo-ferrari);
+        }
+        
+        .dropdown-toggle::after {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        /* CONTENIDO PRINCIPAL */
+        .contenido {
+            flex: 1;
+            background-color: var(--gris-oscuro);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contenido::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 40, 0, 0.1), transparent 70%);
+            z-index: 0;
+        }
+        
+        .contenido-principal {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--blanco);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--rojo-ferrari);
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+        
+        /* GALERÍA DE AUTOS */
+        .galeria-ferraris {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .ferrari-item {
+            position: relative;
+            height: 250px; 
+            border: 1px solid rgba(255, 40, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+        
+        .ferrari-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 40, 0, 0.2);
+        }
+        
+        .ferrari-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            display: block;
+        }
+        
+        .ferrari-descripcion {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            overflow-y: auto; /* Para contenido largo */
+            box-sizing: border-box; /* Incluye padding en la altura */
+        }
+        
+        .ferrari-item:hover .ferrari-descripcion {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .ferrari-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--rojo-ferrari);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--rojo-ferrari);
+            padding-bottom: 0.5rem;
+        }
+        
+        .ferrari-specs {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .ferrari-specs span {
+            color: var(--rojo-ferrari);
+            font-weight: 600;
+        }
+        
+        .ferrari-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--rojo-ferrari);
+            margin: 1rem 0;
+        }
+        
+        .ferrari-info {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--rojo-ferrari);
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background-color: #d92200;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 40, 0, 0.3);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .layout-container {
+                flex-direction: column;
+            }
+            
+            .menu {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 40, 0, 0.3);
+            }
+            
+            .nav-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                margin: 0.5rem;
+            }
+            
+            .nav-link {
+                border-left: none;
+                border-bottom: 4px solid transparent;
+            }
+            
+            .nav-link:hover, .nav-link.active {
+                border-left: none;
+                border-bottom: 4px solid var(--rojo-ferrari);
+            }
+            
+            .dropdown-menu {
+                position: static !important;
+                width: 100%;
+                transform: none !important;
+                margin-top: 0.5rem;
+            }
+            
+            .galeria-ferraris {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contenido {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .ferrari-descripcion {
+                padding: 1.5rem;
+            }
+            
+            .ferrari-title {
+                font-size: 1.5rem;
+            }
+            
+            .ferrari-specs, .ferrari-info {
+                font-size: 0.9rem;
+            }
+        }
+
+        .ferrari-item {
+            position: relative;
+            height: 250px;
+            border: 1px solid rgba(255, 40, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .ferrari-descripcion {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(34, 34, 34, 0.95) 100%);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 40, 0, 0.2);
+            transform: scale(0.98);
+        }
+
+        .ferrari-item:hover .ferrari-image {
+            filter: blur(2px) brightness(0.6);
+            transform: scale(1.05);
+        }
+
+        .ferrari-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Efecto al mostrar descripción */
+        .mostrar-descripcion {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: scale(1) !important;
+        }
+    </style>
+
+    <script>
+    function mostrarDescripcion(elemento) {
+        const descripcion = elemento.querySelector('.ferrari-descripcion');
+        const imagen = elemento.querySelector('.ferrari-image');
+        descripcion.classList.add('mostrar-descripcion');
+        imagen.style.filter = 'blur(2px) brightness(0.6)';
+        imagen.style.transform = 'scale(1.05)';
+    }
+
+    function ocultarDescripcion(elemento) {
+        const descripcion = elemento.querySelector('.ferrari-descripcion');
+        const imagen = elemento.querySelector('.ferrari-image');
+        descripcion.classList.remove('mostrar-descripcion');
+        imagen.style.filter = 'none';
+        imagen.style.transform = 'scale(1)';
+    }
+    </script>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="titulo">
+            <h1 class="logo">VELOCI<span>TÀ</span></h1>
+            <p class="slogan">EXPERIMENTA EL LUJO EN MOVIMIENTO</p>
+        </div>
+        
+        <div class="layout-container">
+            <div class="menu">
+                <div class="menu-header">
+                    <h2 class="menu-title neon-accent">NAVEGA</h2>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="autos.html" class="nav-link active">
+                            <i class="fas fa-car"></i> Nuestros Ferraris
+                        </a>
+                    </li>
+                    <!-- Menú desplegable de servicios -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="serviciosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-tools"></i> Servicios
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="serviciosDropdown">
+                            <li><a class="dropdown-item" href="mantenimiento.html">
+                                <i class="fas fa-cogs"></i> Mantenimiento
+                            </a></li>
+                            <li><a class="dropdown-item" href="montallantas.html">
+                                <i class="fas fa-tire"></i> Montallantas
+                            </a></li>
+                            <li><a class="dropdown-item" href="alineacion.html">
+                                <i class="fas fa-balance-scale"></i> Alineación
+                            </a></li>
+                            <li><a class="dropdown-item" href="balanceo.html">
+                                <i class="fas fa-sync"></i> Balanceo
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contacto.html" class="nav-link">
+                            <i class="fas fa-envelope"></i> Reserva Ahora
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contenido">
+                <div class="contenido-principal">
+                    <h2 class="section-title glitch-effect">NUESTRA COLECCIÓN PREMIUM</h2>
+                    
+                    <p class="intro-text">Descubre nuestra exclusiva colección de Ferraris disponibles para alquiler. Cada uno de estos vehículos representa lo mejor de la ingeniería italiana, combinando potencia, precisión y ese inconfundible rugido que solo un motor Ferrari puede ofrecer. Pasa el cursor sobre cada imagen para descubrir las características de estos increíbles vehículos.</p>
+                    
+                    <div class="galeria-ferraris" >
+                        <!-- Ferrari 1 -->
+                        <div class="ferrari-item" onmouseover="mostrarDescripcion(this)" 
+                        onmouseout="ocultarDescripcion(this)"> 
+                            <img src="Ferrari488gtb.JPG" alt="Ferrari 488 GTB" class="ferrari-image">
+                            <div class="ferrari-descripcion">
+                                <h3 class="ferrari-title">Ferrari 488 GTB</h3>
+                                <p class="ferrari-specs"><span>Motor:</span> V8 biturbo 3.9L</p>
+                                <p class="ferrari-specs"><span>Potencia:</span> 670 CV</p>
+                                <p class="ferrari-specs"><span>0-100 km/h:</span> 3.0 segundos</p>
+                                <p class="ferrari-price">€1,200 / día</p>
+                                <p class="ferrari-info">El Ferrari 488 GTB redefine la experiencia de conducción deportiva con un motor V8 biturbo que genera una potencia impresionante. Su diseño aerodinámico y su tecnología de conducción de precisión garantizan emociones sin igual.</p>
+                                <a href="contacto.html" class="cta-button">Reservar ahora</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Ferrari 2 -->
+                        <div class="ferrari-item" onmouseover="mostrarDescripcion(this)" 
+                        onmouseout="ocultarDescripcion(this)"> 
+                            <img src="Ferrarisf90.JPG" alt="Ferrari SF90 Stradale" class="ferrari-image">
+                            <div class="ferrari-descripcion">
+                                <h3 class="ferrari-title">Ferrari SF90 Stradale</h3>
+                                <p class="ferrari-specs"><span>Motor:</span> V8 biturbo + 3 motores eléctricos</p>
+                                <p class="ferrari-specs"><span>Potencia:</span> 1000 CV</p>
+                                <p class="ferrari-specs"><span>0-100 km/h:</span> 2.5 segundos</p>
+                                <p class="ferrari-price">€2,500 / día</p>
+                                <p class="ferrari-info">La primera Ferrari híbrida enchufable de serie. Este impresionante superdeportivo híbrido combina un potente motor V8 con tres motores eléctricos para ofrecer un rendimiento excepcional y una experiencia de conducción revolucionaria.</p>
+                                <a href="contacto.html" class="cta-button">Reservar ahora</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Ferrari 3 -->
+                        <div class="ferrari-item" onmouseover="mostrarDescripcion(this)" 
+                        onmouseout="ocultarDescripcion(this)"> 
+                            <img src="FerrariRoma.JPG" alt="Ferrari Roma" class="ferrari-image">
+                            <div class="ferrari-descripcion">
+                                <h3 class="ferrari-title">Ferrari Roma</h3>
+                                <p class="ferrari-specs"><span>Motor:</span> V8 biturbo 3.9L</p>
+                                <p class="ferrari-specs"><span>Potencia:</span> 620 CV</p>
+                                <p class="ferrari-specs"><span>0-100 km/h:</span> 3.4 segundos</p>
+                                <p class="ferrari-price">€950 / día</p>
+                                <p class="ferrari-info">El Ferrari Roma encarna la elegancia italiana clásica con un toque contemporáneo. Este GT de dos puertas combina belleza y rendimiento, ideal para quienes buscan disfrutar del lujo deportivo con un diseño más discreto pero igualmente impresionante.</p>
+                                <a href="contacto.html" class="cta-button">Reservar ahora</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Ferrari 4 -->
+                        <div class="ferrari-item" onmouseover="mostrarDescripcion(this)" 
+                        onmouseout="ocultarDescripcion(this)"> 
+                            <img src="Ferrarif8.JPG" alt="Ferrari F8 Tributo" class="ferrari-image">
+                            <div class="ferrari-descripcion">
+                                <h3 class="ferrari-title">Ferrari F8 Tributo</h3>
+                                <p class="ferrari-specs"><span>Motor:</span> V8 biturbo 3.9L</p>
+                                <p class="ferrari-specs"><span>Potencia:</span> 720 CV</p>
+                                <p class="ferrari-specs"><span>0-100 km/h:</span> 2.9 segundos</p>
+                                <p class="ferrari-price">€1,350 / día</p>
+                                <p class="ferrari-info">El F8 Tributo rinde homenaje al motor V8 más premiado en la historia de Ferrari. Con un rendimiento superior y una aerodinámica mejorada, este superdeportivo ofrece una experiencia de conducción que honra el legado de la marca.</p>
+                                <a href="contacto.html" class="cta-button">Reservar ahora</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/music-player.js"></script>
+</body>
+</html>
